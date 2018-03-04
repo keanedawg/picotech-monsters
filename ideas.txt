@@ -1,0 +1,61 @@
+one pokemon
+
+tackle
+absorb
+harden
+tail wag
+
+CPU AI.
+enemy pokemon (same one)
+
+Levels
+
+Attack
+Spcl attack
+
+defense
+Spcl defense
+
+speed
+evasiveness
+
+HP
+PP
+
+pico-tech monster
+zuzu (hamster pokemon)
+
+cocoa     - dark
+spicy     - fire
+minty     - plant
+vanilla   - normal
+sour      - electric
+salty     - rock
+
+cocoa       beats     vanilla
+cocoa       beats     spicy
+-----------------------------
+spicy       beats     cocoa
+spicy       beats     minty
+-----------------------------
+minty       beats     vanilla
+minty       beats     sour
+-----------------------------
+vanilla     beats     salty
+vanilla     beats     sour
+-----------------------------
+sour        beats     cocoa
+sour        beats     salty
+-----------------------------
+salty       beats     minty
+salty       beats     spicy
+
+
+battle graphics / thing whatever
+title screen
+moves/pokemon
+stats
+weaknesses
+music
+sprites
+special effects
