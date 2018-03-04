@@ -2,23 +2,55 @@ pico-8 cartridge // http://www.pico-8.com
 version 16
 __lua__
 
+-- main functions (pico-8 stuff)
 function _init()
+	g_tl = tl_init( {
+		{ tit_update, tit_draw, nil },
+		{ bat_update, bat_draw, nil, bat_init },
+	} )
 end
 
+function _update60()
+	tl_update(g_tl)
+end
 
+function _draw()
+	tl_draw(g_tl)
+end
+
+-- battle functions
+function bat_init()
+	music(0)
+
+end
+
+function bat_update()
+end
+
+function bat_draw()
+	cls()
+	print("battling", 9, 9, 7)
+end
+
+-- title functions
+function tit_update()
+	if btn(4) or btn(5) then
+		tl_next(g_tl)
+	end
+end
+
+function tit_draw()
+	cls()
+	print("hello techmon", 0, 0, 8)
+end
+
+-- other stuff
 function draw_box(move_arr, move)
 	
 end
 
 
 
-function _update60()
-end
-
-function _draw()
-	cls()
-	print("hello techmon", 0, 0, 8)
-end
 
 
 -- alan's library thing
