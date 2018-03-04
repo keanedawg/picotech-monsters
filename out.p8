@@ -17,7 +17,7 @@ end
 
 function _draw()
 	cls()
-	print("num: "..var, 0, 0, 7)
+	print("hello techmon", 0, 0, 8)
 end
 
 
