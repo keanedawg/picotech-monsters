@@ -1,4 +1,4 @@
-one pokemon
+one pokemon (zuzu)
 
 tackle
 absorb
@@ -59,3 +59,5 @@ weaknesses
 music
 sprites
 special effects
+
+levels
