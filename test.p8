@@ -40,45 +40,11 @@ function bat_init()
 end
 
 function bat_update()
-	if btnp(0) then
-		if g_select % 2 == 0 then
-			g_select -= 1
-		end
-	end
-
-	if btnp(1) then
-		if g_select % 2 == 1 then
-			g_select += 1
-		end
-	end
-
-	if btnp(2) then
-		if g_select > 2 then
-			g_select -= 2
-		end
-	end
-
-	if btnp(3) then
-		if g_select < 3 then
-			g_select += 2
-		end
-	end
 end
 
--- max is 12 characters
-g_moves = {
-	"tackle",
-	"absorb",
-	"harden",
-	"tail wag",
-}
-
-g_select = 1
-
 function bat_draw()
-	cls(14)
+	cls()
 	print("battling", 9, 9, 7)
-	draw_moves_box(g_moves, g_select)
 end
 
 -- title functions
@@ -93,49 +59,13 @@ function tit_draw()
 	print("hello techmon", 0, 0, 8)
 end
 
-function draw_moves_box(move_arr, select)
-	draw_box_bkgd()
-
-	local box_w = 50
-	local box_h = 8
-	if select == 1 then
-		rect(10, 103, 10 + box_w, 103 + box_h, 0)
-	elseif select == 2 then
-		rect(67, 103, 67 + box_w, 103 + box_h, 0)
-	elseif select == 3 then
-		rect(10, 112, 10 + box_w, 112 + box_h, 0)
-	elseif select == 4 then
-		rect(67, 112, 67 + box_w, 112 + box_h, 0)
-	end
-
-	print(move_arr[1], 12, 105, 0)
-	print(move_arr[2], 69, 105, 0)
-	print(move_arr[3], 12, 114, 0)
-	print(move_arr[4], 69, 114, 0)
-
-end
-
 -- other stuff
-function draw_box_bkgd()
-	palt(14, true)
-	palt(0, false)
-
-	line(2, 97,  125, 97,  0)
-	line(2, 126, 125, 126, 0)
-
-	line(1,   103,  1,  120,  0)
-	line(126, 103, 126, 120, 0)
-
-	rect(2, 98, 125, 125, 12)
-	rectfill(4, 100, 123, 123, 7)
-	rect(4, 100, 123, 123, 6)
-	rect(3, 99, 124, 124, 0)
-
-	spr(21, 0, 128 - 4*8)
-	spr(21, 0, 128 - 1*8, 1, 1, false, true)
-	spr(21, 128-8, 128 - 4*8, 1, 1, true, false)
-	spr(21, 128-8, 128 - 1*8, 1, 1, true, true)
+function draw_box(move_arr, move)
+	
 end
+
+
+
 
 
 -- alan's library thing
@@ -207,14 +137,14 @@ __gfx__
 03000000088008800d0000d00400000008800880030000000880088003033030eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 03300000080000800d0000d00440044008000080030003300800008003003330eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 03333330080000800d0000d00444444008000080033333300800008003303330eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-03333330088888800dddddd00cccccc003333330eee000ee0000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-03300330088008800dddddd00cc00cc003300030ee0111000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-03000000080000800d0dd0d00c00000003000000e011dd0c0000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-03000000080000800d0dd0d00ccc000003333330e01dd0c00000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-03000000088888800d0dd0d00cccc00003333330e01d0c060000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-03003330088008800d0000d00c00000000000030ee00c0670000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-03300330080000800d0000d00cc00cc003000330ee0c06770000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-03333330080000800d0000d00cccccc003333330e0c067770000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+03333330088888800dddddd00cccccc003333330000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+03300330088008800dddddd00cc00cc003300030000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+03000000080000800d0dd0d00c00000003000000000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+03000000080000800d0dd0d00ccc000003333330000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+03000000088888800d0dd0d00cccc00003333330000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+03003330088008800d0000d00c00000000000030000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+03300330080000800d0000d00cc00cc003000330000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+03333330080000800d0000d00cccccc003333330000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 0000000000000000000000000000000000000000000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 0000000000000000000000000000000000000000000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 0000000000000000000000000000000000000000000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
