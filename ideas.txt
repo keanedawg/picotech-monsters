@@ -51,13 +51,17 @@ salty       beats     minty
 salty       beats     spicy
 
 
-battle graphics / thing whatever
-title screen
-moves/pokemon
-stats
-weaknesses
-music
-sprites
-special effects
+
+
+  battle graphics / thing whatever
+  title screen
+  moves/pokemon
+  stats
+  weaknesses
+X music 
+  sprites
+  special effects
+
+
 
 levels
