@@ -5,7 +5,7 @@ __lua__
 -- main functions (pico-8 stuff)
 function _init()
 	g_tl = tl_init( {
-		{ log_update, log_draw, 1, log_init },
+		{ log_update, log_draw, 1.5, log_init },
 		{ tit_update, tit_draw, nil },
 		{ bat_update, bat_draw, nil, bat_init },
 	} )
@@ -22,17 +22,67 @@ end
 -- logo functions
 function log_init()
 	sfx(10)
+	log_letters = {}
+
+	-- initial pos
+	for i=0,12 do
+		add(log_letters, {
+			ix=100*cos(i*27 / 360)+56,
+			iy=100*sin(i*27 / 360)+56,
+		})
+	end
+
+	for i=1,13 do
+		log_letters[i].x = log_letters[i].ix
+		log_letters[i].y = log_letters[i].iy
+	end
+
+	-- end pos
+	local start_x = 88
+	for i=1,8 do
+		log_letters[i].sp = 8 - i
+		log_letters[i].fx = start_x
+		log_letters[i].fy = 54
+		start_x -= 8
+	end
+
+	start_x = 44
+	for i=9,13 do
+		log_letters[i].sp = i+7
+		log_letters[i].fx = start_x
+		log_letters[i].fy = 66
+		start_x += 8
+	end
+
+	-- time
+	log_time = 0
 end
 
 function log_update()
+	if log_time >= 61 then
+		sfx(10, -2)
+		return
+	end
+
+	for i=1,13 do
+		local ll = log_letters[i]
+		local exp = (log_time / 15) * (log_time / 15)
+		ll.x = ll.ix + (ll.fx - ll.ix) * exp / 16
+		ll.y = ll.iy + (ll.fy - ll.iy) * exp / 16
+	end
+
+	log_time += 1
 end
 
 function log_draw()
 	cls()
-	spr(0, 64 - 8*4, 64 - 8-2, 8, 1)
-	spr(16, 64 - 5*4, 64 + 2, 5, 1)
+	for i=1,13 do
+		local ll = log_letters[i]
+		spr(ll.sp, ll.x, ll.y)
+	end
+	--spr(0,  32, 54, 8, 1)
+	--spr(16, 44, 66, 5, 1)
 end
-
 
 -- battle functions
 function bat_init()
@@ -78,7 +128,8 @@ g_select = 1
 function bat_draw()
 	cls(14)
 	print("battling", 9, 9, 7)
-	draw_moves_box(g_moves, g_select)
+	draw_box_bkgd()
+	draw_selector_box(g_moves, g_select)
 end
 
 -- title functions
@@ -93,9 +144,7 @@ function tit_draw()
 	print("hello techmon", 0, 0, 8)
 end
 
-function draw_moves_box(move_arr, select)
-	draw_box_bkgd()
-
+function draw_selector_box(move_arr, select)
 	local box_w = 50
 	local box_h = 8
 	if select == 1 then
@@ -338,7 +387,7 @@ __sfx__
 001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-000300000e034100401205015050190501d0502005026050290502b0502e050330503305033050330503305033050330503305033050330503305033050330503305033050330503305033040330303302033015
+000514150e034100401205015050190501d0502005026050290502b0502e050330503305033050330503305033050330503305033050330503305033050330503305033050330503305033040330303302033015
 __music__
 00 00414344
 01 00024344
