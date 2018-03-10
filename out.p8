@@ -87,6 +87,7 @@ end
 -- battle functions
 function bat_init()
 	music(0)
+	zuzu = make_pcmn("zuzu", 5)
 end
 
 function bat_update()
@@ -115,21 +116,13 @@ function bat_update()
 	end
 end
 
--- max is 12 characters
-g_moves = {
-	"tackle",
-	"absorb",
-	"harden",
-	"tail wag",
-}
-
 g_select = 1
 
 function bat_draw()
 	cls(14)
 	print("battling", 9, 9, 7)
-	draw_box_bkgd()
-	draw_selector_box(g_moves, g_select)
+	draw_box_bkgd(zuzu.moves)
+	draw_selector_arrow(g_select)
 end
 
 -- title functions
@@ -144,7 +137,7 @@ function tit_draw()
 	print("hello techmon", 0, 0, 8)
 end
 
-function draw_selector_box(move_arr, select)
+function draw_selector_box(select)
 	local box_w = 50
 	local box_h = 8
 	if select == 1 then
@@ -156,16 +149,23 @@ function draw_selector_box(move_arr, select)
 	elseif select == 4 then
 		rect(67, 112, 67 + box_w, 112 + box_h, 0)
 	end
-
-	print(move_arr[1], 12, 105, 0)
-	print(move_arr[2], 69, 105, 0)
-	print(move_arr[3], 12, 114, 0)
-	print(move_arr[4], 69, 114, 0)
-
 end
 
--- other stuff
-function draw_box_bkgd()
+function draw_selector_arrow(select)
+	if select == 1 then
+		spr(32, 5, 103)
+	elseif select == 2 then
+		spr(32, 62, 103)
+	elseif select == 3 then
+		spr(32, 5, 112)
+	elseif select == 4 then
+		spr(32, 62, 112)
+	end
+end
+
+-- other stuff, takes in an array of strings.
+-- max length of each string is 12 characters.
+function draw_box_bkgd(text_arr)
 	palt(14, true)
 	palt(0, false)
 
@@ -184,8 +184,42 @@ function draw_box_bkgd()
 	spr(21, 0, 128 - 1*8, 1, 1, false, true)
 	spr(21, 128-8, 128 - 4*8, 1, 1, true, false)
 	spr(21, 128-8, 128 - 1*8, 1, 1, true, true)
+
+	print(text_arr[1], 12, 105, 0)
+	print(text_arr[2], 69, 105, 0)
+	print(text_arr[3], 12, 114, 0)
+	print(text_arr[4], 69, 114, 0)
 end
 
+
+-- for now, just give the pcmn some basic stats.
+function make_pcmn(name, lvl)
+	local pcmn = {}
+
+	pcmn.lvl = lvl
+	if name == "zuzu" then
+		-- max is 12 characters for a move
+		pcmn.moves = {
+			"tackle",
+			"absorb",
+			"harden",
+			"tail wag",
+		}
+	end
+
+	pcmn.hp = lvl * 5
+	pcmn.att = lvl
+	pcmn.def = lvl
+	pcmn.spd = lvl
+	pcmn.eva = lvl -- evasiveness
+	pcmn.sp_att = lvl
+	pcmn.sp_def = lvl
+
+	pcmn.typ1 = "vanilla"
+	pcmn.typ2 = nil -- to be implemented
+
+	return pcmn
+end
 
 -- alan's library thing
 -- 150 tokens.
