@@ -2,33 +2,40 @@
 
 > ACT I, player's move
 
+0: Check if {picomon1} ded before turn starts
 
 A: "{PLAYERNAME} used {item}."
 
+use_picoball (Pokemon to catch, needs to add to PC, picoball type, isTrainerPicomon)
+{
+AA: "GO PICOBALL!"
 
+AAA: "Aww geez, he doesn't like tight spaces"
+
+AAB: "Aww yiss, you're mine now"
+}
+
+use_move (move_name, )
 B: "{PICOMON1} used {move}."
 
 // attacking moves
 BA: "It's really effective"
 
-BB: "It aint too effective"
-
-BC: "but {PICOMON2} dodged it"
-
-// stat moves
-BD: {PICOMON1} {stat} rose
-
-BE: {PICOMON1} {stat} rose
-
-> ACT II, ai's move
-
-A: "{PLAYERNAME} used {item}."
-
-
-B: "{PICOMON1} used {move}."
-
-BA: "It's really effective"
+BAA: {PICOMON2} fainted.
 
 BB: "It aint too effective"
 
+BBA: {PICOMON2} fainted.
+
 BC: "but {PICOMON2} dodged it"
+
+BD: {PICOMON2} fainted.
+
+BE: Do nothing (end turn)
+
+// stat move
+
+BD: {PICOMON1} {STAT} rose
+
+BE: {PICOMON2} {STAT} rose
+
