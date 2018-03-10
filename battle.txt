@@ -1,0 +1,34 @@
+
+
+> ACT I, player's move
+
+
+A: "{PLAYERNAME} used {item}."
+
+
+B: "{PICOMON1} used {move}."
+
+// attacking moves
+BA: "It's really effective"
+
+BB: "It aint too effective"
+
+BC: "but {PICOMON2} dodged it"
+
+// stat moves
+BD: {PICOMON1} {stat} rose
+
+BE: {PICOMON1} {stat} rose
+
+> ACT II, ai's move
+
+A: "{PLAYERNAME} used {item}."
+
+
+B: "{PICOMON1} used {move}."
+
+BA: "It's really effective"
+
+BB: "It aint too effective"
+
+BC: "but {PICOMON2} dodged it"
