@@ -87,10 +87,15 @@ end
 -- battle functions
 function bat_init()
 	music(0)
-	zuzu = make_pcmn("zuzu", 5)
+	pkmn1 = make_pcmn("zuzu", 5)
+	pkmn2 = make_pcmn("zuzu", 1)
+
+	-- screens are: action, move, pcmn, 
+	screen = "action"
 end
 
-function bat_update()
+-- controlling the selector
+function select_update()
 	if btnp(0) then
 		if g_select % 2 == 0 then
 			g_select -= 1
@@ -116,13 +121,17 @@ function bat_update()
 	end
 end
 
+function bat_update()
+	select_update()
+end
+
 g_select = 1
 
 function bat_draw()
 	cls(15)
 	draw_old_filter()
 	print("battling", 9, 9, 7)
-	draw_box_bkgd(zuzu.moves)
+	draw_box_bkgd(pkmn1.moves)
 	draw_selector_arrow(g_select)
 end
 
@@ -144,6 +153,20 @@ function tit_draw()
 	print("hello techmon", 0, 0, 8)
 end
 
+-- main selection option
+function draw_selector_arrow(select)
+	if select == 1 then
+		spr(32, 5, 103)
+	elseif select == 2 then
+		spr(32, 62, 103)
+	elseif select == 3 then
+		spr(32, 5, 112)
+	elseif select == 4 then
+		spr(32, 62, 112)
+	end
+end
+
+-- another selection option (maybe just for debugging or sumthin')
 function draw_selector_box(select)
 	local box_w = 50
 	local box_h = 8
@@ -155,18 +178,6 @@ function draw_selector_box(select)
 		rect(10, 112, 10 + box_w, 112 + box_h, 0)
 	elseif select == 4 then
 		rect(67, 112, 67 + box_w, 112 + box_h, 0)
-	end
-end
-
-function draw_selector_arrow(select)
-	if select == 1 then
-		spr(32, 5, 103)
-	elseif select == 2 then
-		spr(32, 62, 103)
-	elseif select == 3 then
-		spr(32, 5, 112)
-	elseif select == 4 then
-		spr(32, 62, 112)
 	end
 end
 
