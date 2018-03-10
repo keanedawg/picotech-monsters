@@ -126,10 +126,17 @@ g_moves = {
 g_select = 1
 
 function bat_draw()
-	cls(14)
+	cls(15)
+	draw_old_filter()
 	print("battling", 9, 9, 7)
 	draw_box_bkgd()
 	draw_selector_box(g_moves, g_select)
+end
+
+function draw_old_filter()
+	for i=1,32 do
+		rect(0, i*10, 127, i*10, 6)
+	end
 end
 
 -- title functions
