@@ -87,6 +87,7 @@ end
 -- battle functions
 function bat_init()
 	music(0)
+	zuzu = make_pcmn("zuzu", 5)
 end
 
 function bat_update()
@@ -115,14 +116,6 @@ function bat_update()
 	end
 end
 
--- max is 12 characters
-g_moves = {
-	"tackle",
-	"absorb",
-	"harden",
-	"tail wag",
-}
-
 g_select = 1
 
 function bat_draw()
@@ -130,7 +123,7 @@ function bat_draw()
 	draw_old_filter()
 	print("battling", 9, 9, 7)
 	draw_box_bkgd()
-	draw_selector_box(g_moves, g_select)
+	draw_selector_box(zuzu.moves, g_select)
 end
 
 function draw_old_filter()
@@ -193,6 +186,35 @@ function draw_box_bkgd()
 	spr(21, 128-8, 128 - 1*8, 1, 1, true, true)
 end
 
+
+-- for now, just give the pcmn some basic stats.
+function make_pcmn(name, lvl)
+	local pcmn = {}
+
+	pcmn.lvl = lvl
+	if name == "zuzu" then
+		-- max is 12 characters for a move
+		pcmn.moves = {
+			"tackle",
+			"absorb",
+			"harden",
+			"tail wag",
+		}
+	end
+
+	pcmn.hp = lvl * 5
+	pcmn.att = lvl
+	pcmn.def = lvl
+	pcmn.spd = lvl
+	pcmn.eva = lvl -- evasiveness
+	pcmn.sp_att = lvl
+	pcmn.sp_def = lvl
+
+	pcmn.typ1 = "vanilla"
+	pcmn.typ2 = nil -- to be implemented
+
+	return pcmn
+end
 
 -- alan's library thing
 -- 150 tokens.
